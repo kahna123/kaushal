@@ -8,7 +8,7 @@ import Deletecomp from "@/components/Deletecomp";
 import GlobalPropperties from "@/utilities/GlobalPropperties";
 import axios from "axios";
 
-const ToolingsTable = () => {
+const page = () => {
   const [toolings, setToolings] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortConfig, setSortConfig] = useState({
@@ -210,4 +210,4 @@ const ToolingsTable = () => {
   );
 };
 
-export default ToolingsTable;
+export default page;

@@ -5,7 +5,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import * as Yup from "yup";
 
-const ToolingForm = () => {
+const page = () => {
   const [formData, setFormData] = useState({
     date: "",
     description: "",
@@ -140,4 +140,4 @@ const ToolingForm = () => {
   );
 };
 
-export default ToolingForm;
+export default page;

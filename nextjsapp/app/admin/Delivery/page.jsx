@@ -4,7 +4,7 @@ import { Eye } from 'lucide-react'; // Import only the Eye icon
 import CallFor from '@/utilities/CallFor';
 import { useRouter } from 'next/navigation';
 
-const OrdersTable = () => {
+const page = () => {
     const [orders, setOrders] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [sortConfig, setSortConfig] = useState({ key: '', direction: 'ascending' });
@@ -177,4 +177,4 @@ const OrdersTable = () => {
     );
 };
 
-export default OrdersTable;
+export default page;

@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import * as Yup from 'yup';
 
-const DeliveryForm = ({ params }) => {
+const page = ({ params }) => {
     const [deliveryDate, setDeliveryDate] = useState('');
     const [deliveredQty, setDeliveredQty] = useState('');
     const [availableQty, setAvailableQty] = useState(0);
@@ -119,4 +119,4 @@ const DeliveryForm = ({ params }) => {
     );
 };
 
-export default DeliveryForm;
+export default page;

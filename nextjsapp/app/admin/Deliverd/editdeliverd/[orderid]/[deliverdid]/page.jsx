@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 
-const DeliveryForm = ({ params }) => {
+const page = ({ params }) => {
     const [deliveryDate, setDeliveryDate] = useState('');
     const [deliveredQty, setDeliveredQty] = useState('');
     const [cashPrice, setCashPrice] = useState('');
@@ -145,4 +145,4 @@ const DeliveryForm = ({ params }) => {
     );
 };
 
-export default DeliveryForm;
+export default page;

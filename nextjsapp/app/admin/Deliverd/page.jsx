@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import Deletecomp from '@/components/Deletecomp';
 import GlobalPropperties from '@/utilities/GlobalPropperties';
 
-const OrdersTable = () => {
+const page = () => {
     const [orders, setOrders] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [sortConfig, setSortConfig] = useState({ key: '', direction: 'ascending' });
@@ -182,4 +182,4 @@ const OrdersTable = () => {
     );
 };
 
-export default OrdersTable;
+export default page;

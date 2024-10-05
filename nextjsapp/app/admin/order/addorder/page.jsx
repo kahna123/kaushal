@@ -5,7 +5,7 @@ import { toast } from 'react-hot-toast'; // Import react-hot-toast
 import CallFor from '@/utilities/CallFor';
 import { useRouter } from 'next/navigation';
 
-const OrderForm = () => {
+const page = () => {
   const [formData, setFormData] = useState({
     orderDate: '',
     invoiceNo: '',
@@ -155,4 +155,4 @@ const OrderForm = () => {
   );
 };
 
-export default OrderForm;
+export default page;

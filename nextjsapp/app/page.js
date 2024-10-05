@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import toast, { Toaster } from 'react-hot-toast';
 import CallFor from '@/utilities/CallFor';
 
-export default function LoginPage() {
+export default function page() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();

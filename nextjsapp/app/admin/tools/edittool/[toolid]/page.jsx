@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { useRouter } from "next/navigation";
 import CallFor from "@/utilities/CallFor";
 
-const ToolingEditForm = ({params}) => {
+const page = ({params}) => {
   const [formData, setFormData] = useState({
     date: "",
     description: "",
@@ -154,4 +154,4 @@ const ToolingEditForm = ({params}) => {
   );
 };
 
-export default ToolingEditForm;
+export default page;

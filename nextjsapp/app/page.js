@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import toast, { Toaster } from 'react-hot-toast';
 import CallFor from '@/utilities/CallFor';
-import {imgss} from "./logo1.jpg"
 
 export default function page() {
   const [email, setEmail] = useState('');
@@ -39,7 +38,8 @@ export default function page() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
       <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
-      <img src={"./logo1.jpg"} alt="" className="h-[150px] w-[150px] mx-auto object-fill   rounded-full border-2 border-gray-300" /> 
+        <h1 className="text-3xl font-bold text-center mb-6 text-gray-800" > <span className="text-blue-900 "> SMEW</span> <br /> Login</h1>
+
         <label className="block mb-5">
           <span className="text-sm font-medium text-gray-700">Email:</span>
           <input

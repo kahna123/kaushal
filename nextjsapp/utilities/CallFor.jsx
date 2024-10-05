@@ -3,10 +3,12 @@ import axios from 'axios';
 import GlobalProperties from './GlobalPropperties';
 
 const getToken = () => {
-    const user = sessionStorage.getItem('token') || null;
-    // const data = user ? JSON.parse(user) : null;
-    return user ? user : null;
-}
+    if (typeof window !== 'undefined') {
+      const user = sessionStorage.getItem('token') || null;
+      return user ? user : null;
+    }
+    return null;
+  };
 
 const UrlType = {
     TEST: 'TEST',

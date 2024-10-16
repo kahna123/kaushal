@@ -1,14 +1,16 @@
-"use client";
-import CallFor from '@/utilities/CallFor';
-import { useRouter } from 'next/navigation';
+"use client"
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
+import CallFor from '@/utilities/CallFor';
 
 const page = ({ params }) => {
     const [deliveryDate, setDeliveryDate] = useState('');
     const [deliveredQty, setDeliveredQty] = useState('');
     const [cashPrice, setCashPrice] = useState('');
     const [availableQty, setAvailableQty] = useState(0);
+    const [totalDeliveredQty, setTotalDeliveredQty] = useState(0);  // Already delivered quantity
+    const [deliveredQtyError, setDeliveredQtyError] = useState('');
     const router = useRouter();
     const orderId = params.orderid;
     const deliveryId = params.deliverdid;
@@ -20,6 +22,7 @@ const page = ({ params }) => {
                 if (response) {
                     const { totalQty, totalDeliveredQty } = response.data;
                     setAvailableQty(totalQty - totalDeliveredQty);
+                    setTotalDeliveredQty(totalDeliveredQty); // Store the total delivered quantity
                 }
             } catch (error) {
                 toast.error('Failed to fetch order details');
@@ -73,8 +76,9 @@ const page = ({ params }) => {
             cashprice: Number(cashPrice)
         };
 
-        if (body.deliveredQty > availableQty + Number(deliveredQty)) {
-            toast.error(`Delivered Quantity cannot exceed available quantity (${availableQty + Number(deliveredQty)})`);
+        const maxAllowedQty = availableQty + Number(deliveredQty);
+        if (body.deliveredQty > maxAllowedQty) {
+            toast.error(`Delivered Quantity cannot exceed the total available quantity (${maxAllowedQty})`);
             return;
         }
 
@@ -93,6 +97,19 @@ const page = ({ params }) => {
         }
     };
 
+    const handleDeliveredQtyChange = (e) => {
+        const inputQty = Number(e.target.value);
+        const maxAllowedQty = availableQty + totalDeliveredQty;  // Calculate max allowed quantity
+
+        if (inputQty > maxAllowedQty) {
+            setDeliveredQtyError(`Delivered Quantity cannot exceed the total available quantity (${maxAllowedQty})`);
+        } else {
+            setDeliveredQtyError('');
+        }
+
+        setDeliveredQty(e.target.value);
+    };
+
     return (
         <div className="flex justify-center">
             <form onSubmit={handleSubmit} className="bg-gray-200 dark:bg-gray-600 p-4 rounded shadow-md max-w-md w-full">
@@ -109,16 +126,17 @@ const page = ({ params }) => {
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block mb-2" htmlFor="deliveredQty">Delivered Quantity (Available: {availableQty + Number(deliveredQty)})</label>
+                    <label className="block mb-2" htmlFor="deliveredQty">Delivered Quantity (Available: {availableQty}, Already Delivered: {totalDeliveredQty})</label>
                     <input
                         type="number"
                         id="deliveredQty"
                         value={deliveredQty}
-                        onChange={(e) => setDeliveredQty(e.target.value)}
-                        className="border border-gray-400 dark:border-gray-300 p-2 rounded w-full"
+                        onChange={handleDeliveredQtyChange}
+                        className={`border p-2 rounded w-full ${deliveredQtyError ? 'border-red-500' : 'border-gray-400 dark:border-gray-300'}`}
                         min="1"
                         required
                     />
+                    {deliveredQtyError && <p className="text-red-500 mt-2">{deliveredQtyError}</p>}
                 </div>
                 <div className="mb-4">
                     <label className="block mb-2" htmlFor="cashPrice">Cash Price</label>
@@ -136,7 +154,7 @@ const page = ({ params }) => {
                 <button 
                     type="submit" 
                     className="bg-blue-500 text-white px-4 py-2 rounded w-full"
-                    disabled={!deliveryDate || !deliveredQty || !cashPrice}
+                    disabled={!deliveryDate || !deliveredQty || !cashPrice || deliveredQtyError}
                 >
                     Submit
                 </button>
@@ -146,3 +164,4 @@ const page = ({ params }) => {
 };
 
 export default page;
+
